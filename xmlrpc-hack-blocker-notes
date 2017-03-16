@@ -42,7 +42,7 @@ exec /var/log/apache2/block.sh
 --------------------------------
 vi /var/log/apache2/checkbad.sh
 --------------------------------
-cat /var/log/apache2/access.log | grep xmlrpc | cut -d' ' -f1 | uniq -c  | awk '$1>50{print $2} | uniq
+cat /var/log/apache2/access.log | grep xmlrpc | cut -d' ' -f1 | uniq -c  | awk '$1>50{print $2}' | uniq
 -------------------------------------
 chmod +x /var/log/apache2/checkbad.sh
 -------------------------------------
