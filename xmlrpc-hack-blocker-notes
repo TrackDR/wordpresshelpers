@@ -16,7 +16,6 @@ do
    iptables -A INPUT -s ${x}/24 -j DROP
 done
 
-
 for x in `cat badip2.txt`
 do
    echo $x
