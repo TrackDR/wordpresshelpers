@@ -1,7 +1,7 @@
 http://askubuntu.com/questions/228304/how-do-i-run-a-script-at-start-up
--------------------
+###################
 for ubuntu 14.04
--------------------
+###################
 
 --------------------------------
 vi /var/log/apache2/block.sh
@@ -64,3 +64,12 @@ shutdown -r now
 iptables -L INPUT -v -n
 
 
+###################
+ubuntu 16.04
+#####################
+
+------------------
+vi /etc/rc.local
+-------------------
+/var/log/apache2/block.sh || exit 1 
+exit 0
