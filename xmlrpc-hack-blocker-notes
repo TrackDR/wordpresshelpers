@@ -1,0 +1,67 @@
+http://askubuntu.com/questions/228304/how-do-i-run-a-script-at-start-up
+-------------------
+for ubuntu 14.04
+-------------------
+
+--------------------------------
+vi /var/log/apache2/block.sh
+--------------------------------
+#!/bin/sh
+
+cd /var/log/apache2
+
+for x in `cat badip.txt`
+do
+   echo $x
+   iptables -A INPUT -s ${x}/24 -j DROP
+done
+
+
+for x in `cat badip2.txt`
+do
+   echo $x
+   iptables -A INPUT -s ${x}/16 -j DROP
+done
+
+iptables -L INPUT -v -n
+cd
+--------------------------------
+chmod +x /var/log/apache2/block.sh
+-----------------------------------
+
+
+--------------------------
+vi /etc/init/myjob.conf
+--------------------------
+description "my job"
+start on startup
+task
+exec /var/log/apache2/block.sh
+------------------------------
+
+
+--------------------------------
+vi /var/log/apache2/checkbad.sh
+--------------------------------
+cat /var/log/apache2/access.log | grep xmlrpc | cut -d' ' -f1 | uniq -c  | awk '$1>50{print $2} | uniq
+-------------------------------------
+chmod +x /var/log/apache2/checkbad.sh
+-------------------------------------
+
+==========================================
+iptables -L INPUT -v -n
+/var/log/apache2/checkbad.sh
+
+echo "89.184.75.0" >> /var/log/apache2/badip.txt
+
+echo "51.15.0.0" >> /var/log/apache2/badip2.txt
+
+echo "163.172.0.0" >> /var/log/apache2/badip2.txt
+
+shutdown -r now
+
+#log back in
+
+iptables -L INPUT -v -n
+
+
