@@ -28,7 +28,6 @@ cd
 chmod +x /var/log/apache2/block.sh
 -----------------------------------
 
-
 --------------------------
 vi /etc/init/myjob.conf
 --------------------------
@@ -37,7 +36,6 @@ start on startup
 task
 exec /var/log/apache2/block.sh
 ------------------------------
-
 
 --------------------------------
 vi /var/log/apache2/checkbad.sh
@@ -60,7 +58,6 @@ shutdown -r now
 #log back in
 
 iptables -L INPUT -v -n
-
 
 ###################
 ubuntu 16.04
