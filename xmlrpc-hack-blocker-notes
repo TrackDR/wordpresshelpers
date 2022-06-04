@@ -52,9 +52,7 @@ iptables -L INPUT -v -n
 /var/log/apache2/checkbad.sh
 
 echo "89.184.75.0" >> /var/log/apache2/badip.txt
-
 echo "51.15.0.0" >> /var/log/apache2/badip2.txt
-
 echo "163.172.0.0" >> /var/log/apache2/badip2.txt
 
 shutdown -r now
